@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clothing Store</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url("bg6.jpg");
+            background-repeat: no-repeat;
+            background-size: 100% 100%; /* Forces full stretch without cropping */
+            background-position: center;
+            background-attachment: fixed;
+            height: 100vh;
+            
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+        .container {
+            display: flex;
+            padding: 20px;
+        }
+        .filter-section {
+            width: 20%;
+            padding-right: 20px;
+        }
+        .filter-section h3 {
+            margin-bottom: 10px;
+        }
+        .filter-section label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        .filter-section:hover {
+            background-color:#f6bb79;
+        }
+
+        .filter-section input[type="checkbox"] {
+            margin-right: 10px;              
+            transform: scale(1.2);           
+        }
+
+        .filter-section input[type="checkbox"]:checked {
+            accent-color: #2b7de9;           
+        }
+        .product-section {
+            width: 80%;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .product-card {
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin: 10px;
+            padding: 10px;
+            width: 30%;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
+            text-align: center;
+        }
+        .product-card img {
+            max-width: 40%;
+            height:40%;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 10px;
+           
+        }
+        .product-card h4 {
+            margin-bottom: 10px;
+        }
+        .product-card p {
+            color: #555;
+        }
+        .user-info {
+            position: absolute;
+            top: 8px;
+            right: 10px;
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.6);
+        }
+        .cart-button {
+            background-color: #28a745;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            margin-top: 10px;
+           
+	        box-shadow: 0 2px 10px 1px rgba(0,0,0,0.5);
+        }
+        .cart-button:hover
+        {
+            border-color:white;
+            box-shadow:0 0 8px 0 white;
+        }
+        .header {
+            display: flex; 
+            align-items: center; 
+            padding: 20px; 
+           
+        }
+
+        .logo {
+            margin-right: 10px; 
+        }
+
+        .icon {
+            width: 60px; 
+            height: auto;
+        }
+        .logout
+        {
+            background-color: #EC8305;
+            border: none;
+            color: white;
+            padding: 10px 28px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            margin-left: 25px;
+            cursor: pointer;
+	        box-shadow: 0 2px 10px 1px rgba(0,0,0,0.5);
+        }
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            .filter-section {
+                width: 100%;
+                margin-bottom: 20px;
+                padding-right: 0;
+            }
+            .product-section {
+                width: 100%;
+            }
+            .product-card {
+                width: 100%;
+                max-width: 300px;
+                margin: auto;
+            }
+            .cart-button {
+                padding: 8px 20px;
+                font-size: 14px;
+            }
+            .user-info {
+                top: 10px;
+                right: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="logo">
+            <img src="icon.png" alt="Logo Icon" class="icon"> <!-- Replace with your icon's path -->
+        </div>
+        <h1>Fashion Brand</h1>
+    </header>
+
+<div class="container">
+    <!-- Filter Section -->
+    <div class="filter-section">
+        <h3>Filter</h3>
+        <label>
+            <input type="checkbox" name="category" value="Men">
+            Men's Clothing
+        </label>
+        <label>
+            <input type="checkbox" name="category" value="Women">
+            Women's Clothing
+        </label>
+        <label>
+            <input type="checkbox" name="category" value="Kids">
+            Kids' Clothing
+        </label>
+       
+    </div>
+
+    <!-- Product Section -->
+    <div class="product-section" id="products">
+        <!-- Product Cards -->
+        <div class="product-card" data-category="Men">
+            <img src="IMG1.png" alt="T-shirt 1">
+            <h4>Men's T-shirt</h4>
+            <p>High quality cotton t-shirt. Available in different sizes.</p>
+            <p><strong>450.00</strong></p>
+            <button class="cart-button" onclick="addToCart('Men\'s T-shirt', 450,'IMG1.png')">Add to Cart</button>
+        </div>
+
+        <div class="product-card" data-category="Women">
+            <img src="Couture.jpeg" alt="Dress 1">
+            <h4>Women's Dress</h4>
+            <p>Stylish dress perfect for casual outings. Available in various sizes.</p>
+            <p><strong>450.00</strong></p>
+            <button class="cart-button" onclick="addToCart('Women\'s Dress', 450,'Couture.jpeg')">Add to Cart</button>
+        </div>
+
+        <div class="product-card" data-category="Kids">
+            <img src="kids1.png" alt="Kids Clothing">
+            <h4>Kids' Clothing</h4>
+            <p>Comfortable and trendy clothing for kids. Available in multiple colors.</p>
+            <p><strong>200.00</strong></p>
+            <button class="cart-button" onclick="addToCart('Kids\' Clothing', 200,'kids1.png')">Add to Cart</button>
+        </div>
+        <div class="product-card" data-category="Men">
+            <img src="rrr.png" alt="T-shirt 1">
+            <h4>Men's T-shirt</h4>
+            <p>High quality cotton t-shirt. Available in different sizes.</p>
+            <p><strong>450.00</strong></p>
+            <button class="cart-button" onclick="addToCart('Men\'s T-shirt', 450,'IMG1.png')">Add to Cart</button>
+        </div>
+
+        <div class="product-card" data-category="Women">
+            <img src="gnet.jpg" alt="Dress 1">
+            <h4>Women's Dress</h4>
+            <p>Stylish dress perfect for casual outings. Available in various sizes.</p>
+            <p><strong>450.00</strong></p>
+            <button class="cart-button" onclick="addToCart('Women\'s Dress', 450,'Couture.jpeg')">Add to Cart</button>
+        </div>
+
+        <div class="product-card" data-category="Kids">
+            <img src="kids2.png" alt="Kids Clothing">
+            <h4>Kids' Clothing</h4>
+            <p>Comfortable and trendy clothing for kids. Available in multiple colors.</p>
+            <p><strong>200.00</strong></p>
+            <button class="cart-button" onclick="addToCart('Kids\' Clothing', 200,'kids1.png')">Add to Cart</button>
+        </div>
+        
+       
+    </div>
+</div>
+
+<button class="cart-button" onclick="goToCart()" style="position: fixed; bottom: 20px; right: 20px;">
+    Go to Cart
+</button>
+<div class="user-info">
+    <p id="userName">Welcome, </p>
+    <button class="logout" onclick="logout()">Logout</button>
+    <script>
+        function logout()
+        {
+            window.location.href = 'index.html';
+        }
+
+    </script>
+
+
+   
+</div>
+
+<script>
+   const name = localStorage.getItem('userName');
+   
+
+    // Display user name and points
+    document.getElementById('userName').innerText = `Welcome, ${name}`;
+   
+    document.querySelectorAll('.filter-section input').forEach(function(checkbox) {
+        checkbox.addEventListener('change', filterProducts);
+    });
+
+    function filterProducts() {
+        let selectedFilters = Array.from(document.querySelectorAll('.filter-section input:checked'))
+                                  .map(input => input.value);
+
+        document.querySelectorAll('.product-card').forEach(function(card) {
+            let category = card.getAttribute('data-category');
+            card.style.display = selectedFilters.length === 0 || selectedFilters.includes(category) ? 'block' : 'none';
+        });
+    }
+
+    function addToCart(productName, productPrice, productImage) {
+        const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+        const existingProduct = cartItems.find(item => item.name === productName);
+
+        if (existingProduct) {
+             existingProduct.quantity += 1;
+        } else {
+            cartItems.push({ 
+                name: productName, 
+                price: productPrice, 
+                image: productImage, 
+                quantity: 1 
+            });
+        }
+
+         localStorage.setItem('cartItems', JSON.stringify(cartItems));
+         alert(`${productName} added to cart.`);
+         console.log(cartItems);
+    }
+    function goToCart()
+
+    {
+        window.location.href = 'cart.html';
+    }
+    
+</script>
+
+</body>
+</html>
